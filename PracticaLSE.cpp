@@ -1,29 +1,3 @@
-/*
-	Autor: Emiliano Torres Luis Eduardo a.k.a LaMeraChuleta
-	Practica Lista Enlazada y Creacion de archivos BD
-	Dudas al realizar el programa:
-		*Queria implementar la clase amiga para poder escribir el archivo desde la clas LSE
-		 pero me manda error en la compilacion(quiza la clase Archivo no existe cuando quiero ocuparla?)
-		
-		*Que el usuario pueda elegir en nombre del archivo :(
-		
-	Posibles Mejoras 
-		
-		*Encapsular la carga de la lista por el momento esta en main
-		
-		*En vez de que el nodo tenga un string para cada atributo convertirlo en una structura 
-		para poder manipular mejoreso datos
-	
-	
-	Contacto:
-		
-	geoffreyytorres25@gmail.com
-	
-		
-	
-*/
-
-
 #include<iostream>
 #include <fstream>
 #include <cstring>
