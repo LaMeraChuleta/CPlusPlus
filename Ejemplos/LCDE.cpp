@@ -120,7 +120,8 @@ void LCDE::InsertarF(int x){
 		//ASIGNAMOS EL NUEVO NODO AL FINAL
 		self->Asignasig(aux->Obtienesig());
 		self->asigna_ant(aux);
-		aux->Asignasig(self);							
+		aux->Asignasig(self);	
+		aux->Obtienesig()->asigna_ant(self);
 	}	
 }
 
@@ -135,15 +136,21 @@ void LCDE::InsertarI(int x) {
 	}
 	else{
 		
-		Nodo *aux = Inicio->Obtienesig();		
+		Nodo *aux = Inicio;
+		
+		do{
+			
+			aux = aux->Obtienesig();
+		}
+		while(aux != Inicio);
 		Nodo *self = new Nodo(x);
-		
-		self->asigna_ant(Inicio);
-		self->Asignasig(Inicio->Obtienesig());
-		Inicio->Asignasig(self);
-		
-		
-		
+		//ASIGNAMOS EL NUEVO NODO AL FINAL
+		self->Asignasig(aux->Obtienesig());
+		self->asigna_ant(aux);
+		aux->Asignasig(self);	
+		aux->Obtienesig()->asigna_ant(self);
+		Inicio = self;
+				
 								
 	}
 	
