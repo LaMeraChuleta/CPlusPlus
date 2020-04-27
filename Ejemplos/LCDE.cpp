@@ -1,46 +1,3 @@
-Estructuras y Base de Datos
-Fecha de entrega: 15:00
-LCDE
-100 puntos
-
-Jafeth Alonso Carreón
-13:03 (Última modificación: 13:51)
-Ahora, desarrollaremos una Lista Circular Doblemente Enlazada.
-Para ejemplificar, recuerdan como salían los elefantes en el circo?
-Claro, agarrados de la cola y la trompa. Pues así, es una lista circular doblemente enlazada.
-A continuación les dejo el archivo cpp y los dibujos.
-Mismas reglas.
-Los veo a las 14:30
-Saludos!
-
-main.cpp
-C++
-1 comentario de clase
-
-Jafeth Alonso Carreón13:21
-Jóvenes, me falto modificar la clase nodo, agreguen por favor el apuntador ant, la función obtineant y la función asignaant.
-Por favor hagan esos cambios.
-Saludos!!
-
-Tu trabajo
-Tarea asignada
-
-LaMeraChuleta Benito Bonito - LCDE.pdf
-PDF
-
-LaMeraChuleta Benito Bonito - main.cpp
-C++
-Comentarios privados
-
-
-//
-//  main.cpp
-//  LCDE
-//
-//  Created by Jafeth Alonso Carreón on 4/24/20.
-//  Copyright © 2020 Jafeth Alonso Carreón. All rights reserved.
-//
-
 #include <iostream>
 
 using namespace std;
@@ -55,15 +12,16 @@ private:
     Nodo *sig;
     Nodo *ant;
 public:
-    Nodo()
-    {    dato=0;
-        sig=NULL;
+    Nodo(){    		
+		dato = 0;
+        sig = NULL;
         //Atributo Mio!!
         ant = NULL;
     }
-    Nodo(int x)
-    {    dato=x;
-        sig=NULL;
+    Nodo(int x){    
+		dato = x;
+        sig = NULL;
+        ant = NULL;
     }
     void Asignasig(Nodo*);
     void Leer(int);
@@ -102,47 +60,133 @@ public:
 
 //METODOS DE LA CLASE LISTA CIRCULAR DOBLEMENTE ENLAZADA
 
-void LCDE::InsertarI(int value){
+void LCDE::Imprimir(){
 	
 	if(Inicio == NULL){
 		
-		Inicio = new Nodo(value);
+		cout<<"LISTA VACIA!!!"<<endl;
+	}
+	else{
+		
+		Nodo *aux = Inicio;
+		
+		do{
+			
+			aux->Imprimir();
+			aux = aux->Obtienesig();
+		}
+		while(aux != Inicio);		
+	}
+}
+
+void LCDE::ImprimirR(){
+	
+	if(Inicio == NULL){
+		
+		cout<<"LISTA VACIA!!!"<<endl;
+	}
+	else{
+		
+		Nodo *aux = Inicio;
+		
+		do{
+			
+			aux->Imprimir();
+			aux = aux->Obtienesig();
+		}
+		while(aux != Inicio);		
+	}
+}
+
+void LCDE::InsertarF(int x){
+	
+	if(Inicio == NULL){
+		
+		Inicio = new Nodo(x);
 		Inicio->Asignasig(Inicio);
 		Inicio->asigna_ant(Inicio);
 		
 	}
 	else{
 		
+		Nodo *aux = Inicio;
+		
+		do{
+			
+			aux = aux->Obtienesig();
+		}
+		while(aux != Inicio);
+		Nodo *self = new Nodo(x);
+		//ASIGNAMOS EL NUEVO NODO AL FINAL
+		self->Asignasig(aux->Obtienesig());
+		self->asigna_ant(aux);
+		aux->Asignasig(self);							
+	}	
+}
+
+void LCDE::InsertarI(int x) {
+	
+	if(Inicio == NULL){
+		
+		Inicio = new Nodo(x);
+		Inicio->Asignasig(Inicio);
+		Inicio->asigna_ant(Inicio);
+		
+	}
+	else{
+		
+		Nodo *aux = Inicio->Obtienesig();		
+		Nodo *self = new Nodo(x);
+		
+		self->asigna_ant(Inicio);
+		self->Asignasig(Inicio->Obtienesig());
+		Inicio->Asignasig(self);
+		
+		
+		
+								
 	}
 	
+}
+void LCDE::BorrarI(){
 	
 }
+void LCDE::BorrarF(){
+	
+}
+int LCDE::Contar(){
+	
+}
+Nodo* LCDE::Buscar(int x){
+	
+}
+void LCDE::Borrar(int x){
+	
+}
+
 
 
 //METODOS DE LA CLASE NODO
-void Nodo::Asignasig(Nodo *x)
-{
+void Nodo::Asignasig(Nodo *x){
+	
     this->sig=x;
 }
-void Nodo::Leer(int x)
-{
+void Nodo::Leer(int x){
+	
     this->dato=x;
 }
-void Nodo::Imprimir()
-{
+void Nodo::Imprimir(){
+	
     cout<<this->dato<<endl;
 }
-Nodo* Nodo::Obtienesig()
-{
+Nodo* Nodo::Obtienesig(){
+	
     return(this->sig);
 }
-int Nodo::Obtienedato()
-{
+int Nodo::Obtienedato(){
+	
     return(this->dato);
 }
-
-
-//Metodos Mios!!
 Nodo* Nodo::obtiene_ant(){	
 	return(this->ant);	
 }
@@ -150,7 +194,7 @@ void Nodo::asigna_ant(Nodo *x){
 	this->ant = x;
 }
 
-//----------------------------
+
 
 
 
