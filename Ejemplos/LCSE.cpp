@@ -147,12 +147,11 @@ void LCSE::BorrarI(){
 	else{
 		
 		if(Inicio->Obtienesig() == Inicio){
-			
-			cout<<"Un solo nodo"<<endl;
-			
+					
+			cout<<"Solo un Nodo"<<endl;				
 			Inicio->Asignasig(NULL);
 			delete Inicio;
-			Inicio == NULL;
+			Inicio = NULL;			
 		}
 		else{
 			
@@ -184,7 +183,7 @@ void LCSE::BorrarF(){
 			
 			Inicio->Asignasig(NULL);
 			delete Inicio;
-			Inicio->Asignasig(NULL);			
+			Inicio = NULL;			
 		}
 		else{
 			
@@ -269,6 +268,13 @@ void LCSE::Borrar(int x){
 	else{
 		
 		Nodo *query = Buscar(x);	
+		
+		if(query == NULL){
+			
+			cout<<"Ninguno coincide"<<endl;
+		}
+		else{
+		
 		Nodo *aux = Inicio;
 		Nodo *preFinal = NULL;
 	
@@ -296,7 +302,8 @@ void LCSE::Borrar(int x){
 				delete preFinal;
 				Inicio = aux;				
 			}		
-		}		
+		}
+	}
 	}
 
 	
