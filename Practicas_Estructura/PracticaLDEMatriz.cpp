@@ -1,4 +1,3 @@
-
 #include <iostream>
 using namespace std;
 
@@ -27,9 +26,13 @@ public:
     Nodo *Obtieneant();
     int Obtienedato();
 };
-class LSE
+
+
+
+//Lista con Inicio y Fin
+class LDE
 {    private:
-    Nodo *Inicio;
+    Nodo *Inicio, *Fin;
 public:
     void InsertarI(int);
     void InsertarF(int);
@@ -40,13 +43,42 @@ public:
     int Contar();
     Nodo *Buscar(int);
     void Borrar(int);
-    LSE()
+    LDE()
     {
         Inicio=NULL;
-    
+        Fin=NULL;
+        
     }
     
 };
+
+
+//Metodos de la clase LDE
+
+
+
+//Metodos de la clase Nodo
+void Nodo::Asignasig(Nodo *x){
+    this->sig=x;
+}
+void Nodo::Asignaant(Nodo *x){
+    this->ant=x;
+}
+void Nodo::Leer(int x){
+    this->dato=x;
+}
+void Nodo::Imprimir(){
+    cout<<this->dato<<endl;
+}
+Nodo* Nodo::Obtienesig(){
+    return(this->sig);
+}
+Nodo* Nodo::Obtieneant(){
+    return(this->ant);
+}
+int Nodo::Obtienedato(){
+    return(this->dato);
+}
 
 
 
@@ -57,7 +89,7 @@ int main(int argc, const char * argv[])
     
     
     
-    LSE A;
+    LDE A;
     int opc, dato;
     do{
         cout<<"1.- Insertar Inicio"<<endl;
@@ -71,7 +103,7 @@ int main(int argc, const char * argv[])
         cout<<"9.- Salir"<<endl;
         cout<<"Teclee la opcion"<<endl;
         cin>>opc;
-        
+       /* 
         switch(opc)
         {
             case 1:
@@ -108,8 +140,9 @@ int main(int argc, const char * argv[])
             default:
                 cout<<"opción salir...";
                 break;
-        }
+        }*/
     }while(opc<9);
     
     return 0;
 }
+

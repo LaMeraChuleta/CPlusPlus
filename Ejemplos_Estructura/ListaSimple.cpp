@@ -236,10 +236,7 @@ class LSE{
 					aux->imprime_direccion();
 					aux = aux->ObtenerSig();	
 					system("PAUSE");									
-				}
-				
-				
-								
+				}																
 				
 			}
 		}
@@ -255,6 +252,8 @@ int main(void){
 	newList.InsertarInicio(5);	
 	newList.InsertarFinal(12345);
 	newList.Imprimir();
+	
+	/*
 	cout<<"Antes de buscar"<<endl;	
 	Nodo *Query = newList.Buscar(12345);
 	Query->Imprimir();
@@ -262,6 +261,7 @@ int main(void){
 	newList.Imprimir();
 	
 	newList.Invertir();
+	*/
 
 	system("Pause");	
 	return 0;
