@@ -1,4 +1,3 @@
-
 #include <iostream>
 using namespace std;
 
@@ -81,6 +80,74 @@ int Nodo::Obtienedato(){
 
 
 //Metodo de la clase LDE
+
+Nodo* LDE::Buscar(int x){
+	
+	if(Inicio == NULL){
+		
+		cout<<"Lista vacia :("<<endl;
+		return NULL;		
+	}
+	else{
+		
+		Nodo *help = Inicio;				
+	
+		while(help != NULL){
+										
+			if(help->Obtienedato() == x){
+				return help;
+			}
+			help = help->Obtienesig();					
+		}
+		return NULL;
+	}			
+}
+
+void LDE::Borrar(int x){
+			
+	if(Inicio == NULL){		
+	
+		cout<<"Lista vacia :("<<endl;		
+	}
+	else{
+												
+		if(this->Buscar(x) != NULL){
+	
+			Nodo *aux = Inicio;	
+			while(aux->Obtienesig() != NULL){
+						
+				if(aux->Obtienedato() == x){				
+					break;
+				}
+				aux = aux->Obtienesig();
+			}			
+			
+			if(aux->Obtieneant() == NULL){
+				
+				this->BorrarI();
+			}
+			else if(aux->Obtienesig() == NULL){
+				
+				this->BorrarF();
+			}
+			else{
+						
+				Nodo *help = aux->Obtieneant();
+				help->Asignasig(aux->Obtienesig());
+			
+				aux->Asignasig(NULL);
+			
+				help = help->Obtienesig();
+				help->Asignaant(aux->Obtieneant());			
+				aux->Asignaant(NULL);
+				delete aux;	
+			}	
+		}
+		else{
+			cout<<"No existe ese numero en la lista!!"<<endl;
+		}
+	}	
+}
 void LDE::InsertarI(int x){
 			
 	if(Inicio == NULL){
@@ -99,6 +166,8 @@ void LDE::InsertarI(int x){
 }
 void LDE::InsertarF(int x){
 	
+
+	
 	if(Inicio == NULL){
 		
 		Inicio = new Nodo(x);
@@ -113,17 +182,67 @@ void LDE::InsertarF(int x){
 		while(aux->Obtienesig() != NULL){
 			
 			aux = aux->Obtienesig();
-		}
-		system("cls");
-		cout<<"Sali del while"<<endl;
-		aux->Imprimir();
-		if(aux->Obtienesig() == NULL){
-			cout<<"EL siguiente es null"<<endl;
-		}				
+		}	
+		aux->Imprimir();								
 		newNodo->Asignaant(aux);
-		aux->Asignasig(newNodo);				
+		aux->Asignasig(newNodo);
+
 	}
 	
+}
+void LDE::BorrarI(){
+	
+	if(Inicio == NULL){
+		
+		cout<<"Lista vacia :("<<endl;
+	}
+	else{
+		
+		if(Inicio->Obtienesig() == NULL){
+			
+			Inicio = NULL;
+		}
+		else{
+			
+			Nodo *aux = Inicio->Obtienesig();									
+			aux->Asignaant(NULL);
+			Inicio->Asignasig(NULL);
+			delete Inicio;			
+			Inicio = aux;									
+		}				
+	}
+}
+void LDE::BorrarF(){
+	
+	if(Inicio == NULL){
+		
+		cout<<"Lista vacia :("<<endl;
+	}
+	else{
+		
+		if(Inicio->Obtienesig() == NULL){
+			
+			Inicio = NULL;
+		}
+		else{		
+			
+			Nodo *aux = Inicio;
+			
+			while(aux->Obtienesig() != NULL){
+			
+				
+				aux = aux->Obtienesig();
+			}			
+			aux = aux->Obtieneant();
+						
+			Nodo *help = aux->Obtienesig();
+			
+			aux->Asignasig(NULL);
+			help->Asignaant(NULL);
+			
+			delete help;			
+		}				
+	}		
 }
 void LDE::Imprimir(){
 	
@@ -141,7 +260,45 @@ void LDE::Imprimir(){
 		}
 	}
 }
-
+void LDE::ImprimirR(){
+	
+	if(Inicio == NULL){
+				
+		cout<<"Lista Vacio :("<<endl;
+	}
+	else{				 
+		Nodo *help = Inicio;				
+	
+		while(help->Obtienesig() != NULL){
+													
+			help = help->Obtienesig();								
+		}
+		while(help != NULL){
+											
+			help->Imprimir();		
+			help = help->Obtieneant();								
+		}					
+	}	
+}
+int LDE::Contar(){
+	
+	if(Inicio == NULL){
+				
+		cout<<"Lista Vacio :("<<endl;
+		return 0;
+	}
+	else{				 
+		Nodo *help = Inicio;
+		int contador = 1;				
+	
+		while(help->Obtienesig() != NULL){
+									
+			contador++;																			
+			help = help->Obtienesig();								
+		}
+		return contador;				
+	}		
+}
 
 
 
@@ -183,11 +340,6 @@ int main(int argc, const char * argv[])
                 cin>>dato;
                 A.InsertarF(dato);
                 break;
-            case 7:
-                A.Imprimir();
-                break;
-                
-        /*          
             case 3:
                 A.BorrarI();
                 break;
@@ -201,21 +353,21 @@ int main(int argc, const char * argv[])
             case 6:
                 cout<<"Teclee el dato a borrar"<<endl;
                 cin>>dato;
+                system("cls");
                 A.Borrar(dato);
-                break;
-                */
-        
-                /*
+                break;      
+            case 7:
+                A.Imprimir();
+                break;       
             case 8:
                 A.ImprimirR();
-                break;
-                */                
+                break;             
             default:
                 cout<<"opción salir...";
                 break;
         }
         
-        //system("cls");
+        
         
     }while(opc<9);
     
