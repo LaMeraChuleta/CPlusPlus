@@ -10,8 +10,7 @@ class Perro {
 		string Nombre;
 		int Edad;
 		float Peso;
-	public:
-		
+	public:		
 		Perro( string N = " ", int E = 0, float P = 0.0);
 		Perro(const Perro& P);
 		Perro operator=(const Perro& P);

@@ -88,7 +88,6 @@ int Nodo::Obtienedato(){
 }
 
 //Metodos Clase LDE_I_F
-
 Nodo* LDE::Buscar(int x){
 	
 	if(Inicio == NULL){

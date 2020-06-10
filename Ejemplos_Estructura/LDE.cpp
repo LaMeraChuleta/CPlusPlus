@@ -53,8 +53,6 @@ public:
 	}
     
 };
-
-
 //Metodos de la clase Nodo
 void Nodo::Asignasig(Nodo *x){
     this->sig=x;
@@ -78,9 +76,7 @@ int Nodo::Obtienedato(){
     return(this->dato);
 }
 
-
 //Metodo de la clase LDE
-
 Nodo* LDE::Buscar(int x){
 	
 	if(Inicio == NULL){
@@ -165,8 +161,6 @@ void LDE::InsertarI(int x){
 	}
 }
 void LDE::InsertarF(int x){
-	
-
 	
 	if(Inicio == NULL){
 		
@@ -300,17 +294,8 @@ int LDE::Contar(){
 	}		
 }
 
-
-
-
-
-
-
-int main(int argc, const char * argv[])
-{
-    
-    
-    
+int main(int argc, const char * argv[]){
+            
     LDE A = LDE();
     int opc, dato;
     do{
@@ -324,9 +309,9 @@ int main(int argc, const char * argv[])
         cout<<"8.- Imprimir en Reversa"<<endl;
         cout<<"9.- Salir"<<endl;
         cout<<"Teclee la opcion"<<endl;
-        cin>>opc;
-        
-        
+        cin>>opc; 
+		
+		system("cls");               
         switch(opc)
         {
             case 1:
