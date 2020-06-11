@@ -64,7 +64,9 @@ class LCSE{
 	public:
     	void InsertarI(char *);
     	void InsertarF(char *);
+    	void Inicializar();
     	void Imprimir();
+    	void Jugar();
     	void BorrarI();
     	void BorrarF();
     	int Contar();
@@ -76,8 +78,6 @@ class LCSE{
 
 
 //DECLARACION DE LOS METODOS DE LA LISTA CIRCULAR SIMPLEMTE ENLAZADA
-
-
 void LCSE::InsertarI(char* nombre){
 	
 	if(Inicio == NULL){
@@ -103,7 +103,26 @@ void LCSE::InsertarI(char* nombre){
 	}
 		
 }
-
+void LCSE::Inicializar(){
+	
+	
+    int numJugadores = 0;        
+    cout<<"Imgrese el Numero de Jugadores!!"<<endl;
+    cin>>numJugadores;    
+        
+    for(int i = 1; i <= numJugadores; i++) {
+    	
+    	cin.ignore();
+    	//string name("");
+    	char nombre[50];
+    	cout<<"Ingrese el nombre del Jugador: "<<i<<endl;
+    	//getline(cin, name);
+    	cin.getline(nombre, 50);
+    	//char* nombre = const_cast<char*>(name.c_str();    	
+    	this->InsertarF(nombre);    	
+	}
+	system("CLS");		
+}
 void LCSE::InsertarF(char* nombre){
 	
 	if(Inicio == NULL){
@@ -127,8 +146,28 @@ void LCSE::InsertarF(char* nombre){
 	}
 	
 }
-
-
+int LCSE::Contar(){
+	
+	if(Inicio == NULL){
+					
+		return 0;		
+	}
+	else{
+		
+		Nodo *aux = Inicio;
+		int conteo = 0;
+				
+		do{
+			
+			conteo += 1;	
+			aux = aux->Obtienesig();
+		}
+		while(aux != Inicio);
+		
+		return conteo;
+	}
+	
+}
 void LCSE::Imprimir(){
 				
 	if(Inicio == NULL){
@@ -147,44 +186,52 @@ void LCSE::Imprimir(){
 		while(aux != Inicio);		
 	}
 }
+//void LCSE
+
 
 
 
 
 int main(int argc, const char * argv[]) {
-    // insert code here...
     
-   
-    
-    LCSE A;
-    
-
-    int numJugadores = 0;
-    
-    
-    cout<<"Imgrese el Numero de Jugadores!!"<<endl;
-    cin>>numJugadores;    
-    
-    
-    for(int i = 1; i <= numJugadores; i++) {
-    	
-    	cin.ignore();
-    	string name("");
-    	cout<<"Ingrese el nombre del Jugador: "<<i<<endl;
-    	getline(cin, name);
-    	char* nombre = const_cast<char*>(name.c_str());    	
-    	A.InsertarF(nombre);    	
-	}
-	system("CLS");
-	A.Imprimir();
-	
-	
-
- 
-    
-    system("Pause");
-
-
+	           
+	LCSE A;	
+    int opc, dato;
+    do{                
+        cout<<"1.- Inicializar"<<endl;                
+        cout<<"2.- Jugar 18"<<endl;
+        cout<<"3.- Contar"<<endl;        
+        cout<<"4.- Imprimir"<<endl;
+        cout<<"5.- Salir"<<endl;
+        cout<<"Teclee la opcion"<<endl;
+        cin>>opc;
+        
+        switch(opc)
+        {
+            case 1:
+            	system("CLS");                                
+                A.Inicializar();
+                break;
+            case 2:
+            	system("CLS");                                            
+                break;
+            case 3:
+            	system("CLS");
+                A.Contar();
+                break;
+            case 4:
+            	system("CLS");
+                A.Imprimir();
+                break;
+            default:
+            	system("CLS");
+                cout<<"opción salir...";
+                break;
+        }
+    }while(opc<5);
+        
+                
     return 0;
 }
+
 

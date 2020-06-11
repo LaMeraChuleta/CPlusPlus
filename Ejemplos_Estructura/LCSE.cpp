@@ -71,8 +71,7 @@ int Nodo::Obtienedato(){
 //DEFINICON DE LOS METODOS LISTA CIRCULAR SIMPLEMENTE ENLAZADA
 
 void LCSE::InsertarI(int x){
-	
-	
+				
 	if(Inicio == NULL){
 		
 		Inicio = new Nodo(x);
@@ -92,7 +91,7 @@ void LCSE::InsertarI(int x){
 		Nodo *self = new Nodo(x);
 		aux->Asignasig(self);
 		self->Asignasig(Inicio);
-		Inicio = self;		
+		Inicio = self;																
 	}
 }
 void LCSE::InsertarF(int x){
@@ -127,14 +126,14 @@ void LCSE::Imprimir(){
 	}
 	else{
 		
-		Nodo *aux = Inicio;
+		Nodo *aux = Inicio;						
 		
 		do{
 			
 			aux->Imprimir();
-			aux = aux->Obtienesig();
+			aux = aux->Obtienesig();						
 		}
-		while(aux != Inicio);		
+		while(aux != Inicio);
 	}
 }
 
@@ -147,8 +146,7 @@ void LCSE::BorrarI(){
 	else{
 		
 		if(Inicio->Obtienesig() == Inicio){
-					
-			cout<<"Solo un Nodo"<<endl;				
+											
 			Inicio->Asignasig(NULL);
 			delete Inicio;
 			Inicio = NULL;			
@@ -177,8 +175,7 @@ void LCSE::BorrarF(){
 		cout<<"LISTA VACIA :(  !!!"<<endl;
 	}
 	else{
-				
-					
+									
 		if(Inicio->Obtienesig() == Inicio){
 			
 			Inicio->Asignasig(NULL);
@@ -188,27 +185,20 @@ void LCSE::BorrarF(){
 		else{
 			
 			Nodo *aux = Inicio;
-			Nodo *preFinal = NULL;
+			Nodo *help = NULL;
 			
-			bool stop = true;
-			while(stop){
+			do{
 				
-				aux = aux->Obtienesig();
-				preFinal = aux->Obtienesig();				
-				
-				if(preFinal->Obtienesig() == Inicio){
-					
-					aux->Asignasig(preFinal->Obtienesig());
-					preFinal->Asignasig(NULL);
-					delete preFinal;
-					Inicio = aux;
-					stop = false;
-					
-				}								
-			}							
+				help = aux;
+				aux = aux->Obtienesig();								
+			}
+			while(aux->Obtienesig() != Inicio);
+						
+			help->Asignasig(aux->Obtienesig());
+			aux->Asignasig(NULL);
+			delete aux;						
 		}
-	}
-	
+	}	
 }
 int LCSE::Contar(){
 	
@@ -275,38 +265,38 @@ void LCSE::Borrar(int x){
 		}
 		else{
 		
-		Nodo *aux = Inicio;
-		Nodo *preFinal = NULL;
+			Nodo *aux = Inicio;
+			Nodo *preFinal = NULL;
 	
-		if(query == aux){
+			if(query == aux){
 		
-			BorrarI();
-		}
-		else{
-			
-			do{
-				
-				aux = aux->Obtienesig();
-				preFinal = aux->Obtienesig();
-			}
-			while(preFinal != query);
-			
-			if(preFinal->Obtienesig() == Inicio){
-				
-				BorrarF();
+				BorrarI();
 			}
 			else{
+			
+				do{
 				
-				aux->Asignasig(preFinal->Obtienesig());
-				preFinal->Asignasig(NULL);
-				delete preFinal;
-				Inicio = aux;				
-			}		
+					aux = aux->Obtienesig();
+					preFinal = aux->Obtienesig();
+				}
+				while(preFinal != query);
+			
+				aux->Imprimir();
+				preFinal->Imprimir();
+			
+				if(preFinal->Obtienesig() == Inicio){
+				
+					BorrarF();
+				}
+				else{
+				
+					aux->Asignasig(preFinal->Obtienesig());
+					preFinal->Asignasig(NULL);
+					delete preFinal;								
+				}		
+			}
 		}
-	}
-	}
-
-	
+	}	
 }
 
 
