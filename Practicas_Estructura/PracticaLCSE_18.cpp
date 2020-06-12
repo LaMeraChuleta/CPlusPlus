@@ -75,8 +75,6 @@ class LCSE{
     	LCSE(){ Inicio=NULL; }
     
 };
-
-
 //DECLARACION DE LOS METODOS DE LA LISTA CIRCULAR SIMPLEMTE ENLAZADA
 void LCSE::InsertarI(char* nombre){
 	
@@ -108,20 +106,27 @@ void LCSE::Inicializar(){
 	
     int numJugadores = 0;        
     cout<<"Imgrese el Numero de Jugadores!!"<<endl;
-    cin>>numJugadores;    
-        
-    for(int i = 1; i <= numJugadores; i++) {
-    	
-    	cin.ignore();
-    	//string name("");
-    	char nombre[50];
-    	cout<<"Ingrese el nombre del Jugador: "<<i<<endl;
-    	//getline(cin, name);
-    	cin.getline(nombre, 50);
-    	//char* nombre = const_cast<char*>(name.c_str();    	
-    	this->InsertarF(nombre);    	
+    cin>>numJugadores;   
+	
+	if(numJugadores <= 1) {
+		
+		cout<<"Debes de ser almenos 2 jugadores."<<endl;
 	}
-	system("CLS");		
+	else{
+	        
+    	for(int i = 1; i <= numJugadores; i++) {
+    	
+    		cin.ignore();
+    		//string name("");
+    		char nombre[50];
+    		cout<<"Ingrese el nombre del Jugador: "<<i<<endl;
+    		//getline(cin, name);
+    		cin.getline(nombre, 50);
+    		//char* nombre = const_cast<char*>(name.c_str();    	
+    		this->InsertarF(nombre);    	
+		}
+		system("CLS");
+	}	
 }
 void LCSE::InsertarF(char* nombre){
 	
@@ -186,7 +191,53 @@ void LCSE::Imprimir(){
 		while(aux != Inicio);		
 	}
 }
-//void LCSE
+void LCSE::Jugar(){
+	
+	if(Inicio == NULL){
+		
+		cout<<"Primero agregar los jugadores"<<endl;
+	}
+	else{
+		
+		//cout<<"No estoy vacia"<<endl;
+		Nodo *aux = Inicio;
+		
+		int iter = 0;
+								
+		do{
+															
+			iter += 1;
+			
+			if(iter == 17){
+				
+				if(this->Contar() == 1){
+					
+					cout<<"El perdedor es: "<<aux->ObtieneNombre()<<endl;
+					break;
+					
+				}
+				else{
+																	
+					Nodo *help = aux;
+					aux = aux->Obtienesig();					
+					cout<<"Se Elimino a:"<<aux->ObtieneNombre()<<endl;
+					help->Asignasig(aux->Obtienesig());
+					aux->Asignasig(NULL);
+					delete aux;				
+					help = help->Obtienesig();				
+					Inicio = help;
+					aux = Inicio;						
+					iter = 0;					
+				}						
+			}
+			else{
+				
+				aux = aux->Obtienesig();	
+			}				
+		}
+		while(iter != 18);						
+	}		
+}
 
 int main(int argc, const char * argv[]) {
     
@@ -209,11 +260,12 @@ int main(int argc, const char * argv[]) {
                 A.Inicializar();
                 break;
             case 2:
-            	system("CLS");                                            
+            	system("CLS");  
+				A.Jugar();                                          
                 break;
             case 3:
             	system("CLS");
-                A.Contar();
+                cout<<"El numero de jugadores es:"<<A.Contar()<<endl;
                 break;
             case 4:
             	system("CLS");
