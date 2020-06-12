@@ -350,11 +350,8 @@ int main(int argc, const char * argv[]){
             default:
                 cout<<"opción salir...";
                 break;
-        }
-        
-        
-        
-    }while(opc<9);
+        }                        
+    	}while(opc<9);
     
     return 0;
 }

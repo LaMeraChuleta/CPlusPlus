@@ -43,8 +43,9 @@ class Nodo{
     	Nodo *Obtienesig();
     	Nodo *Obtieneant();
     	float Obtienedato();
+    	int Obtiene_X();
+    	int Obtiene_Y();
 };
-
 
 
 //Lista con Inicio y Fin
@@ -64,9 +65,11 @@ class LDE{
     	void ImprimirR();
     	int Contar();
     	Nodo *Buscar(float);
+    	Nodo *Buscar(int, int);
     	void Borrar(float);
     	void Inicializar();
     	void Leer();
+    	void Limpiar();
     	LDE operator + (LDE);
     	LDE operator - (LDE);
     	LDE operator * (LDE);
@@ -75,31 +78,149 @@ class LDE{
     	    Fin=NULL;        
     	}
     	LDE(int,int,float);
-    	LDE(int,float);
-    
+    	LDE(int,float);    
 };
 
 
 //Metodos de la clase LDE
-LDE LDE::operator+(LDE matriz_param){
+
+void LDE::Limpiar(){
 	
 		
+	if(Inicio == NULL){
+				
+		cout<<"Lista Vacio :("<<endl;
+	}
+	else{
+					 
+		Nodo *help = Inicio;				
+	
+		while(help != NULL){
+			
+			help = help->Obtienesig();							
+			this->BorrarI();							
+		}
+	}	
+}
+
+Nodo* LDE::Buscar(int x, int y){
+	
+	if(Inicio == NULL){
+			
+		cout<<"Lista vacia :("<<endl;
+		return NULL;		
+	}
+	else{
+		
+		Nodo *help = Inicio;				
+				
+		while(help != NULL){
+										
+			if(help->Obtiene_X() == x && help->Obtiene_Y()){
+				return help;
+			}
+			help = help->Obtienesig();					
+		}
+		return NULL;
+	}
+}
+LDE LDE::operator+(LDE matriz_param){
+	
+	LDE C,F;		
+	
 	if(this->Contar() == matriz_param.Contar()){
 		
-		cout<<"Sumando..."<<endl;	
-		/*	
-		while(Inicio != NULL){
-			
-			Inicio->Leer(Inicio->Obtienedato() + matriz.Inicio)
-		}
-		*/
+		cout<<"Sumando..."<<endl;
 		
-		return *this;
+		Nodo *aux = Inicio;		
+
+		while(aux != NULL){
+			
+			float m1 = aux->Obtienedato();			
+			Nodo *help = matriz_param.Buscar(aux->Obtiene_X(), aux->Obtiene_Y());			
+			m1 += help->Obtienedato();						
+			//cout<<m1<<endl;
+			aux->Leer(m1);
+			F.InsertarF(m1, aux->Obtiene_X(), aux->Obtiene_Y());
+			
+			aux = aux->Obtienesig();
+		}
+		system("PAUSE");
+		
+		//F.Imprimir();
+		
+		return F;
 	}
 	else{
 		
 		cout<<"Tus matrices deben de tener las mismas filas y columnas!!"<<endl;
-		return *this;
+		return F;
+	}
+}
+LDE LDE::operator-(LDE matriz_param){
+	
+	LDE C,F;		
+	
+	if(this->Contar() == matriz_param.Contar()){
+		
+		cout<<"Sumando..."<<endl;
+		
+		Nodo *aux = Inicio;		
+
+		while(aux != NULL){
+			
+			float m1 = aux->Obtienedato();			
+			Nodo *help = matriz_param.Buscar(aux->Obtiene_X(), aux->Obtiene_Y());			
+			m1 -= help->Obtienedato();						
+			//cout<<m1<<endl;
+			aux->Leer(m1);
+			F.InsertarF(m1, aux->Obtiene_X(), aux->Obtiene_Y());
+			
+			aux = aux->Obtienesig();
+		}
+		system("PAUSE");
+		
+		//F.Imprimir();
+		
+		return F;
+	}
+	else{
+		
+		cout<<"Tus matrices deben de tener las mismas filas y columnas!!"<<endl;
+		return F;
+	}
+}
+LDE LDE::operator*(LDE matriz_param){
+	
+	LDE C,F;		
+	
+	if(this->Contar() == matriz_param.Contar()){
+		
+		cout<<"Sumando..."<<endl;
+		
+		Nodo *aux = Inicio;		
+
+		while(aux != NULL){
+			
+			float m1 = aux->Obtienedato();			
+			Nodo *help = matriz_param.Buscar(aux->Obtiene_X(), aux->Obtiene_Y());			
+			m1 *= help->Obtienedato();						
+			//cout<<m1<<endl;
+			aux->Leer(m1);
+			F.InsertarF(m1, aux->Obtiene_X(), aux->Obtiene_Y());
+			
+			aux = aux->Obtienesig();
+		}
+		system("PAUSE");
+		
+		//F.Imprimir();
+		
+		return F;
+	}
+	else{
+		
+		cout<<"Tus matrices deben de tener las mismas filas y columnas!!"<<endl;
+		return F;
 	}
 }
 void LDE::Inicializar(){
@@ -144,8 +265,7 @@ void LDE::Leer(){
 					
 			cout<<"Ingrese el dato:"<<endl;
 			cin>>dato;
-			aux->Leer(dato);
-			aux->Imprimir();									
+			aux->Leer(dato);										
 			aux = aux->Obtienesig();			
 		}
 	}
@@ -307,7 +427,8 @@ void LDE::Imprimir(){
 	while(help != NULL){
 										
 			help->Imprimir();
-			help = help->Obtienesig();					
+			cout<<"\b\b";
+			help = help->Obtienesig();	
 		}
 	}
 }
@@ -363,7 +484,8 @@ void Nodo::Leer(float x){
     this->dato=x;
 }
 void Nodo::Imprimir(){    
-    cout<<"La cordenas es [x,y] "<<"["<<x<<" , "<<y<<"]  "<<"  y tiene el dato: "<<this->dato<<endl;
+
+    cout<<"La cordenas es [x,y] "<<"["<<x<<" , "<<y<<"]"<<" y tiene el dato: "<<this->dato<<endl;  
 }
 Nodo* Nodo::Obtienesig(){
     return(this->sig);
@@ -374,14 +496,20 @@ Nodo* Nodo::Obtieneant(){
 float Nodo::Obtienedato(){
     return(this->dato);
 }
-
+int Nodo::Obtiene_X(){
+    return(this->x);
+}
+int Nodo::Obtiene_Y(){
+    return(this->y);
+}
 
 int main(int argc, const char * argv[]){
 	
             
-    LDE A,B;
+    LDE A,B,C;
     int opc;
 	float dato;
+	
     do{
         cout<<"1.- Inicializar"<<endl;
         cout<<"2.- Leer"<<endl;
@@ -389,7 +517,8 @@ int main(int argc, const char * argv[]){
         cout<<"4.- Restar"<<endl;
         cout<<"5.- Multiplicar"<<endl;        
         cout<<"6.- Imprimir"<<endl;        
-        cout<<"7.- Salir"<<endl;
+        cout<<"7.- Limpiar"<<endl;   
+        cout<<"8.- Salir"<<endl;
         cout<<"Teclee la opcion"<<endl;
         cin>>opc;
         system("cls");        
@@ -399,30 +528,52 @@ int main(int argc, const char * argv[]){
             case 1:                                
                 A.Inicializar();
                 break;
-            case 2:                                
-                A.Leer();
+            case 2:
+				if(A.Contar() != 0){					
+					A.Leer();
+				}
+				else{
+					cout<<"Debes Inicializar la Matriz!!"<<endl;
+				}                                                
                 break;
             case 3:            	            	
-            	cout<<"Inicialice la matriz nueva para sumar"<<endl;
+            	cout<<"Inicialice la matriz nueva para sumar."<<endl;            	
             	B.Inicializar();
             	B.Leer();
-				A = A + B;				
+            	system("CLS");
+				C = A + B;
+				B.Limpiar();				
+				C.Imprimir();				
                 break;
             case 4:
-				cout<<"HOla"<<endl;
+				cout<<"Inicialice la matriz nueva para restar."<<endl;            	
+            	B.Inicializar();
+            	B.Leer();
+            	system("CLS");
+				C = A - B;
+				B.Limpiar();				
+				C.Imprimir();	
                 break;
             case 5:
-                dato=A.Contar();
-                cout<<"Hay "<<dato<<" nodos en la Lista"<<endl;
+				cout<<"Inicialice la matriz nueva para restar."<<endl;            	
+            	B.Inicializar();
+            	B.Leer();
+            	system("CLS");
+				C = A * B;
+				B.Limpiar();				
+				C.Imprimir();
                 break;
             case 6:            	
                 A.Imprimir();                                
+                break;
+            case 7:            	
+                A.Limpiar();
                 break;
             default:
                 cout<<"opción salir...";
                 break;
         }
-    }while(opc<9);
+    }while(opc<8);
     
     return 0;
 }

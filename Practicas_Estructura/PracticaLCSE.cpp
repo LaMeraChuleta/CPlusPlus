@@ -188,10 +188,6 @@ void LCSE::Imprimir(){
 }
 //void LCSE
 
-
-
-
-
 int main(int argc, const char * argv[]) {
     
 	           
