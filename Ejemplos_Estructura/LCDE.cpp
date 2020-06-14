@@ -33,28 +33,27 @@ public:
     void asigna_ant(Nodo*);
 };
 
-
-
 //INICIO DE LA CLASE LISTA CIRCULAR DOBLEMENTE ENLAZADA
 
-class LCDE
-{    private:
-    Nodo *Inicio;
-public:
-    void InsertarI(int);
-    void InsertarF(int);
-    void Imprimir();
-    void ImprimirR();
-    void BorrarI();
-    void BorrarF();
-    int Contar();
-    Nodo *Buscar(int);
-    void Borrar(int);
-    LCDE()
-    {
-        Inicio=NULL;
-    }
-    
+class LCDE {
+
+	private:
+    	Nodo *Inicio;
+    	
+	public:
+    	void InsertarI(int);
+    	void InsertarF(int);
+    	void Imprimir();
+    	void ImprimirR();
+    	void BorrarI();
+    	void BorrarF();
+    	int Contar();
+    	Nodo *Buscar(int);
+    	void Borrar(int);
+    	LCDE(){
+    		
+    		Inicio=NULL;	
+		}                
 };
 
 
@@ -78,7 +77,6 @@ void LCDE::Imprimir(){
 		while(aux != Inicio);		
 	}
 }
-
 void LCDE::ImprimirR(){
 	
 	if(Inicio == NULL){
@@ -86,15 +84,15 @@ void LCDE::ImprimirR(){
 		cout<<"LISTA VACIA!!!"<<endl;
 	}
 	else{
-		
-		Nodo *aux = Inicio;
+				
+		Nodo *aux = Inicio->obtiene_ant();
 		
 		do{
-			
+									
 			aux->Imprimir();
-			aux = aux->Obtienesig();
+			aux = aux->obtiene_ant();
 		}
-		while(aux != Inicio);		
+		while(aux != Inicio->obtiene_ant());		
 	}
 }
 
@@ -108,20 +106,17 @@ void LCDE::InsertarF(int x){
 		
 	}
 	else{
-		
+				
+		Nodo *newNodo = new Nodo(x);			
 		Nodo *aux = Inicio;
-		
-		do{
 			
-			aux = aux->Obtienesig();
-		}
-		while(aux != Inicio);
-		Nodo *self = new Nodo(x);
-		//ASIGNAMOS EL NUEVO NODO AL FINAL
-		self->Asignasig(aux->Obtienesig());
-		self->asigna_ant(aux);
-		aux->Asignasig(self);	
-		aux->Obtienesig()->asigna_ant(self);
+		newNodo->Asignasig(aux);
+		newNodo->asigna_ant(aux->obtiene_ant());
+			
+		aux->asigna_ant(newNodo);			
+		aux = newNodo->obtiene_ant();
+					
+		aux->Asignasig(newNodo);										
 	}	
 }
 
@@ -131,7 +126,112 @@ void LCDE::InsertarI(int x) {
 		
 		Inicio = new Nodo(x);
 		Inicio->Asignasig(Inicio);
-		Inicio->asigna_ant(Inicio);
+		Inicio->asigna_ant(Inicio);		
+	}
+	else{		
+	
+		Nodo *newNodo = new Nodo(x);
+		Nodo *aux = Inicio;
+				
+		newNodo->Asignasig(aux);
+		newNodo->asigna_ant(aux->obtiene_ant());
+			
+		aux->asigna_ant(newNodo);			
+		aux = newNodo->obtiene_ant();
+		aux->Asignasig(newNodo);
+			
+		Inicio = newNodo;												
+	}
+	
+}
+void LCDE::BorrarI(){
+	
+	if(Inicio == NULL){
+		
+		cout<<"Lista vacia."<<endl;
+	}
+	else{
+		
+		if(this->Contar() == 1){
+			
+			Nodo *aux = Inicio;			
+			aux->Asignasig(NULL);
+			aux->asigna_ant(NULL);						
+			delete Inicio;			
+			Inicio = NULL;
+		}
+		else{
+			
+			Nodo *aux = Inicio->obtiene_ant();
+			Nodo *help = Inicio;						
+			aux->Asignasig(help->Obtienesig());			
+			aux = aux->Obtienesig();			
+			aux->asigna_ant(help->obtiene_ant());			
+			help->asigna_ant(NULL);
+			help->Asignasig(NULL);			
+			Inicio = aux;			
+			delete help;			
+		}		
+	}	
+}
+void LCDE::BorrarF(){
+	
+	if(Inicio == NULL){
+		
+		cout<<"Lista vacia."<<endl;
+	}
+	else{
+		
+		if(this->Contar() == 1){
+			
+			Nodo *aux = Inicio;
+			
+			aux->Asignasig(NULL);
+			aux->asigna_ant(NULL);						
+			delete Inicio;			
+			Inicio = NULL;
+		}
+		else{
+			
+			Nodo *aux = Inicio->obtiene_ant();
+			Nodo *help = aux->obtiene_ant();						
+	
+			help->Asignasig(aux->Obtienesig());
+			
+			Inicio->asigna_ant(aux->obtiene_ant());
+			
+			aux->Asignasig(NULL);
+			aux->asigna_ant(NULL);
+			
+			delete aux;												
+		}		
+	}	
+}
+int LCDE::Contar(){
+	
+	if(Inicio == NULL){
+			
+		return 0;
+	}
+	else{
+				
+		Nodo *aux = Inicio->obtiene_ant();
+		int conteo = 0;				
+		do{	
+		
+			conteo += 1;											
+			aux = aux->obtiene_ant();
+		}
+		while(aux != Inicio->obtiene_ant());		
+		
+		return conteo;
+	}
+}
+Nodo* LCDE::Buscar(int x){
+	
+	if(Inicio == NULL){
+		
+		cout<<"Lista vacia"<<endl;
 		
 	}
 	else{
@@ -140,35 +240,62 @@ void LCDE::InsertarI(int x) {
 		
 		do{
 			
+			if(aux->Obtienedato() == x){
+				
+				return aux;
+			}
+			
 			aux = aux->Obtienesig();
 		}
-		while(aux != Inicio);
-		Nodo *self = new Nodo(x);
-		//ASIGNAMOS EL NUEVO NODO AL FINAL
-		self->Asignasig(aux->Obtienesig());
-		self->asigna_ant(aux);
-		aux->Asignasig(self);	
-		aux->Obtienesig()->asigna_ant(self);
-		Inicio = self;
-				
-								
+		while(aux != Inicio);		
+		
+		cout<<"No se encontro ese dato"<<endl;
+		return NULL;
 	}
-	
-}
-void LCDE::BorrarI(){
-	
-}
-void LCDE::BorrarF(){
-	
-}
-int LCDE::Contar(){
-	
-}
-Nodo* LCDE::Buscar(int x){
 	
 }
 void LCDE::Borrar(int x){
 	
+	if(Inicio == NULL){
+			
+		cout<<"Lista vacia"<<endl;		
+	}
+	else{
+		
+						
+		Nodo *query = this->Buscar(x);
+		
+		if(query != NULL){
+			
+			
+			if(query->Obtienesig() == Inicio){
+				
+				this->BorrarF();
+			}
+			else if(query == Inicio){
+				
+				this->BorrarI();
+			}
+			else{
+				
+				Nodo *aux = query->obtiene_ant();
+				
+				aux->Asignasig(query->Obtienesig());
+				
+				aux = aux->Obtienesig();
+				
+				aux->asigna_ant(query->obtiene_ant());
+				
+				query->Asignasig(NULL);
+				query->asigna_ant(NULL);
+				
+				delete query;
+				
+				
+			}
+								
+		}	
+	}		
 }
 
 
@@ -226,34 +353,42 @@ int main(int argc, const char * argv[]) {
         switch(opc)
         {
             case 1:
+            	system("CLS");
                 cout<<"teclee el dato a insertar"<<endl;
                 cin>>dato;
                 A.InsertarI(dato);
                 break;
             case 2:
+            	system("CLS");
                 cout<<"Teclee el dato a insertar"<<endl;
                 cin>>dato;
                 A.InsertarF(dato);
                 break;
             case 3:
+            	system("CLS");
                 A.BorrarI();
                 break;
             case 4:
+            	system("CLS");
                 A.BorrarF();
                 break;
             case 5:
+            	system("CLS");
                 dato=A.Contar();
                 cout<<"Hay "<<dato<<" nodos en la Lista"<<endl;
                 break;
             case 6:
+            	system("CLS");
                 cout<<"Teclee el dato a borrar"<<endl;
                 cin>>dato;
                 A.Borrar(dato);
                 break;
             case 7:
+            	system("CLS");
                 A.Imprimir();
                 break;
             case 8:
+            	system("CLS");
                 A.ImprimirR();
                 break;
                 
