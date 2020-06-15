@@ -27,8 +27,7 @@ public:
     void Leer(int);
     void Imprimir();
     Nodo *Obtienesig();
-    int Obtienedato();
-    //Metodos Mios!!
+    int Obtienedato();    
     Nodo *obtiene_ant();
     void asigna_ant(Nodo*);
 };
@@ -254,7 +253,7 @@ Nodo* LCDE::Buscar(int x){
 	}
 	
 }
-void LCDE::Borrar(int x){
+void LCDE::Borrar(int x){		
 	
 	if(Inicio == NULL){
 			

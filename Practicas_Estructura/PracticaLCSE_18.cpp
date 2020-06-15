@@ -198,10 +198,8 @@ void LCSE::Jugar(){
 		cout<<"Primero agregar los jugadores"<<endl;
 	}
 	else{
-		
-		//cout<<"No estoy vacia"<<endl;
-		Nodo *aux = Inicio;
-		
+				
+		Nodo *aux = Inicio;		
 		int iter = 0;
 								
 		do{
