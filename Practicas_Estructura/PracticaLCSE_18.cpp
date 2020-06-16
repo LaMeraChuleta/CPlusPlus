@@ -208,11 +208,9 @@ void LCSE::Jugar(){
 			
 			if(iter == 17){
 				
-				if(this->Contar() == 1){
-					
+				if(this->Contar() == 1){					
 					cout<<"El perdedor es: "<<aux->ObtieneNombre()<<endl;
-					break;
-					
+					break;					
 				}
 				else{
 																	
