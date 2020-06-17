@@ -575,7 +575,7 @@ int main(void){
 				system("CLS");
 						
 				 
-			cout<<"\t\tAgregar Automovil Al Inicio"<<endl;
+			cout<<"\t\tAgregar Automovil Al Final"<<endl;
 						
 				cin.ignore();				
 				cout<<"Agregar Info Del Automovil"<<endl;

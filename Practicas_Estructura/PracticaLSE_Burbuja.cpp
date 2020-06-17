@@ -34,13 +34,6 @@ class Nodo{
 		int ObtenerDato(){
     		return (this->dato);
 		}
-		void imprime_direccion(){
-			//cout<<"El Valor del nodo es:"<<this->Sig<<endl;
-			cout<<"La Direccion Clase nodo del dato:"<<&this->Sig<<endl;
-			cout<<"El Valor del dato es:"<<this->dato<<endl;
-			cout<<"EL la direccion del dato es:"<<&this->dato<<endl;
-			
-		}		
 };
 
 class LSE{
@@ -50,6 +43,39 @@ class LSE{
 		LSE(){
 			Inicio = NULL;
 		}
+		void Burbuja(){
+		
+			if(Inicio == NULL){
+				
+				cout<<"Lista vacia"<<endl;
+			}
+			else{
+				
+				
+				Nodo *help = Inicio;
+				Nodo *aux = Inicio->ObtenerSig();
+				
+				while(help->ObtenerSig() != NULL){
+					
+					while(aux != NULL)				{
+						
+						if(help->ObtenerDato() < aux->ObtenerDato()){
+							
+							int a = help->ObtenerDato();							
+							help->Leer(aux->ObtenerDato());							
+							aux->Leer(a);														
+						}
+						
+						aux = aux->ObtenerSig();
+					}
+							
+					help = help->ObtenerSig();
+					aux = help->ObtenerSig();					
+				}
+				cout<<"Sali del while"<<endl;
+				
+			}			
+		}				
 		void InsertarInicio(int x){
 			
 			if(!Inicio){
@@ -233,7 +259,7 @@ class LSE{
 				while(aux != NULL){
 										
 					aux->Imprimir();
-					aux->imprime_direccion();
+					//aux->imprime_direccion();
 					aux = aux->ObtenerSig();	
 					system("PAUSE");									
 				}																
@@ -244,28 +270,67 @@ class LSE{
 
 int main(void){
 	
-	LSE newList;
-	newList.InsertarInicio(1);
-	newList.InsertarInicio(2);
-	newList.InsertarInicio(3);
-	newList.InsertarInicio(4);
-	newList.InsertarInicio(5);	
-	newList.InsertarFinal(12345);
-	newList.Imprimir();
+	LSE A;
 	
-	/*
-	cout<<"Antes de buscar"<<endl;	
-	Nodo *Query = newList.Buscar(12345);
-	Query->Imprimir();
-	newList.Borrar(12345);
-	newList.Imprimir();
-	
-	newList.Invertir();
-	*/
-
-	system("Pause");	
-	return 0;
+    int opc, dato;
+    do{
+        cout<<"1.- Insertar Inicio"<<endl;
+        cout<<"2.- Insertar Fin"<<endl;
+        cout<<"3.- Borrar Inicio"<<endl;
+        cout<<"4.- Borrar Fin"<<endl;
+        cout<<"5.- Contar"<<endl;
+        cout<<"6.- Borrar"<<endl;
+        cout<<"7.- Imprimir"<<endl;
+		cout<<"8.- Burbuja"<<endl;         
+        cout<<"9.- Salir"<<endl;
+        cout<<"Teclee la opcion"<<endl;
+        cin>>opc; 
+		
+		system("cls");               
+        switch(opc)
+        {
+            case 1:
+                cout<<"teclee el dato a insertar"<<endl;
+                cin>>dato;
+                A.InsertarInicio(dato);
+                system("cls");
+                break;
+            case 2:
+                cout<<"Teclee el dato a insertar"<<endl;
+                cin>>dato;
+                A.InsertarFinal(dato);
+                break;
+            case 3:
+                A.BorrarInicio();
+                break;
+            case 4:
+                A.BorrarFinal();
+                break;
+            case 5:
+                dato=A.Contar();
+                cout<<"Hay "<<dato<<" nodos en la Lista"<<endl;
+                break;
+            case 6:
+                cout<<"Teclee el dato a borrar"<<endl;
+                cin>>dato;
+                system("cls");
+                A.Borrar(dato);
+                break;      
+            case 7:
+                A.Imprimir();
+                break; 
+			case 8:
+                A.Burbuja();
+                break;                     
+            default:
+                cout<<"opción salir...";
+                break;
+        }    
+		                    
+    }while(opc < 9);
 	
 }
+
+
 
 
