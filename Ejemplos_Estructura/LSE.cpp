@@ -34,7 +34,6 @@ class Nodo{
 		int ObtenerDato(){
     		return (this->dato);
 		}
-
 };
 
 class LSE{

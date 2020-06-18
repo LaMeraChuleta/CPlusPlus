@@ -71,9 +71,7 @@ class LSE{
 							
 					help = help->ObtenerSig();
 					aux = help->ObtenerSig();					
-				}
-				cout<<"Sali del while"<<endl;
-				
+				}								
 			}			
 		}				
 		void InsertarInicio(int x){
