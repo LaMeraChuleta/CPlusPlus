@@ -1,5 +1,7 @@
 #include <iostream>
 #include <string.h>
+#include <fstream>
+#include <stdlib.h> 
 
 using namespace std;
 
@@ -33,7 +35,7 @@ class Nodo{
     	void Imprimir();
     	Nodo *Obtienesig();
     	Nodo *Obtieneant();
-    	int ObtieneEdad();
+    	int ObtieneEdad();    	
     	char* ObtieneNombre();
 };
 
@@ -54,6 +56,7 @@ class LCDE{
 		void Inicializar();
 		void Jugar();
     	int Contar();
+    	void InicializarFichero();
     	Nodo *Buscar(char*);
     	void Borrar(char*);
     	LCDE(){
@@ -65,6 +68,31 @@ class LCDE{
 
 //METODOS DE LA CLASE LISTA CIRCULAR DOBLEMENTE ENLAZADA
 
+
+void LCDE::InicializarFichero(){
+	
+			                    
+  	ifstream fe("C:/temporal/21_juego.txt"); 
+	   		   		      	
+  	while (!fe.eof()) {
+    
+		char nombre[100];	   		
+    	fe.getline(nombre, 100, '\t');    		    	   		  		      	    	
+    	char edad[50];
+    	fe.getline(edad, 50);   
+		
+		int edad_int = atoi(edad);		
+		
+		//cout<<nombre<<endl;
+		if(nombre != " " && edad_int != 0) 										
+			this->InsertarF(nombre, edad_int);
+		
+	}
+	
+
+  	fe.close();  		
+		
+}
 void LCDE::Jugar(){
 	
 	if(Inicio == NULL){
@@ -460,10 +488,11 @@ int main(int argc, const char * argv[]) {
     do{
         cout<<"1.- Agregar Jugadores"<<endl;
         cout<<"2.- Jugar"<<endl;
-        cout<<"3.- Contar"<<endl;
+        cout<<"3.- Inicializar Fichero"<<endl;        
         cout<<"4.- Imprimir"<<endl;
         cout<<"5.- Imprimir R"<<endl;                        
-        cout<<"6.- Salir"<<endl;
+        cout<<"6.- Contar"<<endl;
+        cout<<"7.- Salir"<<endl;
         cout<<"Teclee la opcion"<<endl;
         cin>>opc;
         
@@ -480,8 +509,8 @@ int main(int argc, const char * argv[]) {
                 break;
             case 3:
             	system("CLS");
-                A.Contar();
-                break;
+				A.InicializarFichero();
+                break;      
             case 4:
             	system("CLS");
                 A.Imprimir();
@@ -489,12 +518,16 @@ int main(int argc, const char * argv[]) {
             case 5:
             	system("CLS");
 				A.ImprimirR();
-                break;                   
+                break; 
+            case 6:
+            	system("CLS");
+                cout<<"La lista contiene: "<<A.Contar()<<" nodos"<<endl;
+                break;                  
             default:
                 cout<<"opción salir...";
                 break;
         }
-    }while(opc < 6);
+    }while(opc < 7);
     
     return 0;
     
