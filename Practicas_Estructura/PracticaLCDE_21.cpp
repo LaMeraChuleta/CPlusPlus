@@ -5,8 +5,7 @@ using namespace std;
 
 class Nodo{
 	
-	private:
-		
+	private:		
     	char *Nombre;
     	int Edad;
     	Nodo *sig;

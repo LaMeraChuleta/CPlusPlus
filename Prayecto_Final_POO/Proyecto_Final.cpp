@@ -1,35 +1,23 @@
 #include<iostream>
+#include<string>
 #include "MODULE_HOSPITAL.h"
-#include "MODULE_SUB_ESPECIALIDAD.h"
 
 using namespace std;
 
 
 int main(){
-	
-		
-	Hospital new_hospital("Centro Medico", "General", "Corazones", true, 100);
-	
-	new_hospital.Imprimir();
-	
-	Sub_Especialidad *sub_esp;
-	
-	sub_esp = new Sub_Especialidad[3];
-		
 
-	sub_esp[0].Imprimir();
-	sub_esp[1].Imprimir();
-	sub_esp[2].Imprimir();
+	string nombre, zona;
 	
-	system("PAUSE");
+	cout<<"ESCRIBA EL NOMBRE DE SU HOSPITAL"<<endl;
+	fflush(stdin);	
+	getline(cin, nombre);
 			
-		
-	sub_esp = new Sub_Especialidad[2];
-	
-	
-	sub_esp[0].Imprimir();
-	sub_esp[1].Imprimir();
-	sub_esp[100].Imprimir();
-	
-	
+	cout<<"ESCRIBA LA ZONA O UBICACION DEL HOSPITAL"<<endl;
+	fflush(stdin);	
+	getline(cin, zona);
+												
+	Hospital new_hospital(nombre, zona, true);	
+	new_hospital.Menu_Hospital();
+				
 }

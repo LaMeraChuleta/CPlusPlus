@@ -19,7 +19,7 @@ class Archivo{
 		void Inicializar(){
 			
 						
-			A.open("D:\Carros.txt", ios::out);
+			A.open("C:/temporal/Carros.txt", ios::out);
 			if(A.fail()){
 				
 				cout<<"No se pudo abrir el archivo"<<endl;
@@ -36,7 +36,7 @@ class Archivo{
 		void InicializarMarca(){
 			
 						
-			Marca.open("D:\Marca.txt", ios::out);
+			Marca.open("C:/temporal/Marca.txt", ios::out);
 			if(Marca.fail()){
 				
 				cout<<"No se pudo abrir el archivo"<<endl;
@@ -56,7 +56,7 @@ class Archivo{
 		void InicializarModelo(){
 			
 						
-			Modelo.open("D:\Modelo.txt", ios::out);
+			Modelo.open("C:/temporal/Modelo.txt", ios::out);
 			if(Modelo.fail()){
 				
 				cout<<"No se pudo abrir el archivo"<<endl;
@@ -75,7 +75,7 @@ class Archivo{
 		void InicializarCilindros(){
 			
 						
-			Cilindro.open("D:\Cilindros.txt", ios::out);
+			Cilindro.open("C:/temporal/Cilindros.txt", ios::out);
 			if(Cilindro.fail()){
 				
 				cout<<"No se pudo abrir el archivo"<<endl;
@@ -95,10 +95,9 @@ class Archivo{
 		void Finalizar(){
 			
 			A.close();
-		}	
-		
+		}			
 		void InicializarLec(){
-			A.open("D:\Carros.txt", ios::in);
+			A.open("C:/temporal/Carros.txt", ios::in);
 			if(A.fail()){
 				
 				cout<<"No se abrio el archivo"<<endl;
@@ -336,8 +335,7 @@ class LSE{
 				return listaReturn;								
 			}
 			
-		}
-			
+		}			
 		void Imprimir(){
 			if(!Inicio){
 				
@@ -506,7 +504,7 @@ int main(void){
 
 		
 	while(!A.A.eof()){
-				
+								
 				
 				char Marca[20], Modelo[20], Categoria[20], Transmision[20], Year[20], Cilindros[20], Color[20];
 				A.A.getline(Marca,20, '\t');
@@ -515,8 +513,11 @@ int main(void){
 				A.A.getline(Transmision,20,'\t');
 				A.A.getline(Year,20,'\t');
 				A.A.getline(Cilindros,20,'\t');
-				A.A.getline(Color,20);				
-				list.InsertarFinal(Marca,Modelo,Categoria,Transmision,Year,Cilindros,Color);												
+				A.A.getline(Color,20);	
+				
+				if((int)Marca[0] != 0){
+					list.InsertarFinal(Marca,Modelo,Categoria,Transmision,Year,Cilindros,Color);																													
+				}																										
 			}
 			
 	cout<<"Se cargo el archivo Correctamente!!!!"<<endl;
@@ -680,18 +681,19 @@ int main(void){
 		break;
 		
 		default:
-			
+			cout<<"Adios!!"<<endl;
+						
 			A.Finalizar();
 			A.Inicializar();
-			list.EscribirTodo(A);
-			cout<<"Adios!!"<<endl;
+			list.EscribirTodo(A);	
+	
 			break;
 					
 	}
 		
 }	
 while(answer <= 8);
-	
+
 	A.Finalizar();
 	A.FinalizarCilindro();
 	A.FinalizarMarca();

@@ -159,15 +159,15 @@ void LCDE::LeerFicheroCifrado(){
 			                    
   	ifstream fe("C:/temporal/salida.txt"); 
 	   		
-    char parrafo[100];
-    int bytes[100]; 
+    char parrafo[200];
+    int bytes[200]; 
   	
   	while (!fe.eof()) {
     	   		
     	fe.getline(parrafo, 49, '\n');    		    	   		  		  
     	break;
 	}	
-	for(int i = 0; i < 100; i++){
+	for(int i = 0; i < 200; i++){
     			    			    				
     	if(parrafo[i] ==  0){
     		
@@ -198,17 +198,17 @@ void LCDE::LeerFichero(){
 	
 	this->LimpiarLista();
 		                    
-  	ifstream fe("C:/temporal/archivo.txt"); 
+  	ifstream fe("C:/temporal/entrada.txt"); 
 	   		
-    char parrafo[100];
-    int bytes[100]; 
+    char parrafo[200];
+    int bytes[200]; 
   	
   	while (!fe.eof()) {
     	   		
-    	fe.getline(parrafo, 49, '\n');    		    	   		  		  
+    	fe.getline(parrafo, 200, '\n');    		    	   		  		  
     	break;
 	}	
-	for(int i = 0; i < 100; i++){
+	for(int i = 0; i < 200; i++){
     			    			    				
     	if(parrafo[i] ==  0){
     		
@@ -597,6 +597,7 @@ int main() {
                 break;	    
             default:
                 cout<<"opción salir...";
+                A.CifrarFichero();
                 break;
         }
     }while(opc < 4);
