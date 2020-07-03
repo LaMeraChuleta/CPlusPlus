@@ -17,9 +17,7 @@ class  Plantilla {
 		int num_medicos;
 		int key_medico;
 		int num_enfemeras;
-		int key_enfermera;
-		bool Ini_medico;
-		bool Ini_enfermera;
+		int key_enfermera;	
 		Medico *medicos;
 		Enfermera *enfermeras;
 		

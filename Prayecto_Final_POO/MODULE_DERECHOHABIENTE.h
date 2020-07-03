@@ -33,8 +33,7 @@ void Derechohabiente::Imprimir(){
 	cout<<"| PACIENTE: "<<this->nombre<<"\t"<<" EDAD: "<<this->edad<<"\t"<<" # SEGURO: "<<this->num_seguro<<"\t"<<" ESPECIALIDAD: "<<this->sub_esp<<"\t"<<endl;	
 }
 void Derechohabiente::Leer(){
-		
-	
+			
 	cout<<"+---------------------------------------------------+"<<endl;
 	cout<<"|         CAMBIAR INFORMACION DEL PACIENTE          |"<<endl;
 	cout<<"+---------------------------------------------------+"<<endl;	

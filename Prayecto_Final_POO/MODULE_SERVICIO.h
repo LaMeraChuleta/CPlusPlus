@@ -20,9 +20,9 @@ class Servicio {
 	private:
 				
 		string jefe_servicio;		
-		Plantilla plantilla;
 		int camas_asignadas;
 		int camas_ocupadas;
+		Plantilla plantilla;		
 		Derechohabiente *pacientes;		
 
 	public:
@@ -35,24 +35,24 @@ class Servicio {
 			this->camas_ocupadas = 0;
 			this->pacientes = new Derechohabiente[camas];									
 		}
-		~Servicio();
-		
+		~Servicio();		
 		void Inicializar_Plantilla();								
 		void Agregar_Derechohabiente(string sub_esp);		
 		void Imprimir();	
 		void Imprimir_Pacientes();
 		void Imprimir_Pacientes(string sub_esp);
 		int Contar_Ocupado();	
-		int Contar_Disponible();		
-		void Menu_Servicios();		
+		int Contar_Disponible();
 		void Buscar_Paciente(string buscar, int tipo_busqueda);	
+		void Menu_Servicios();	
+
 	
 	private:
 											
-		void Menu_Opciones_Busqueda(Derechohabiente &actual_paciente, int index);		
+		void Menu_Opciones_Busqueda(Derechohabiente &actual_paciente, int index);				
 		void Borrar(Derechohabiente &borrar_paciente, int index);		
 		void Buscar_Medico();
-		void Buscar_Enfermera();
+		void Buscar_Enfermera();		
 								
 };
 

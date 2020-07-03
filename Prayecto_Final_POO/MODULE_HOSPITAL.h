@@ -163,7 +163,7 @@ void Hospital::Menu_Ingreso(){
 					cout<<"+---------------------------------------------+"<<endl;
 					cout<<"|           RECEPCION DEL PACIENTE            |"<<endl;	
 					cout<<"|---------------------------------------------|"<<endl;		
-					cout<<"|         ELIGA LA SUB-ESPECIALIDAD           |"<<endl;
+					cout<<"|             ELIGA EL SERVICIO               |"<<endl;
 					cout<<"+---------------------------------------------+"<<endl;
 								
 					int i = 0;
